@@ -164,7 +164,7 @@
                 android:layout_weight="1"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="@string/plus_button_text"
+                android:text="@string/plus_text"
                 android:textSize="@dimen/button_text_size" />
         </TableRow>
 
@@ -216,7 +216,7 @@
                 android:layout_weight="1"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="@string/minus_button_text"
+                android:text="@string/minus_text"
                 android:textSize="@dimen/button_text_size" />
         </TableRow>
 
@@ -268,7 +268,7 @@
                 android:layout_weight="1"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="@string/multiply_button_text"
+                android:text="@string/multiply_text"
                 android:textSize="@dimen/button_text_size" />
         </TableRow>
 
@@ -322,7 +322,7 @@
                 android:layout_weight="1"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="@string/divide_button_text"
+                android:text="@string/divide_text"
                 android:textSize="@dimen/button_text_size" />
         </TableRow>
 

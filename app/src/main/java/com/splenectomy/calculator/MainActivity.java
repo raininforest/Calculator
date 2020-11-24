@@ -80,6 +80,54 @@ public class MainActivity extends AppCompatActivity {
         zeroButton.setOnClickListener(digitButtonListener);
         pointButton.setOnClickListener(digitButtonListener);
         equalsButton.setOnClickListener(equalsButtonListener);
+        plusButton.setOnClickListener(operationButtonListener);
+        minusButton.setOnClickListener(operationButtonListener);
+        divideButton.setOnClickListener(operationButtonListener);
+        multiplyButton.setOnClickListener(operationButtonListener);
+    }
+
+    private final View.OnClickListener operationButtonListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.minusButton:
+                    putSymbolOperation(minusButton.getText().toString());
+                    break;
+                case R.id.plusButton:
+                    putSymbolOperation(plusButton.getText().toString());
+                    break;
+                case R.id.multiplyButton:
+                    putSymbolOperation(multiplyButton.getText().toString());
+                    break;
+                case R.id.divideButton:
+                    putSymbolOperation(divideButton.getText().toString());
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + view.getId());
+            }
+        }
+    };
+
+    private void putSymbolOperation(String characterString){
+        if (!characterString.isEmpty()) {
+            Character minusCharacter = getResources().getString(R.string.minus_text).charAt(0);
+            Character plusCharacter = getResources().getString(R.string.plus_text).charAt(0);
+            Character multiplyCharacter = getResources().getString(R.string.multiply_text).charAt(0);
+            Character divideCharacter = getResources().getString(R.string.divide_text).charAt(0);
+            StringBuilder expressionString = new StringBuilder(expressionTextView.getText());
+            if (expressionString.length()>0) {
+                Character lastCharacter = expressionString.charAt(expressionString.length()-1);
+                boolean noOperationSymbolAtTheEnd = (!lastCharacter.equals(minusCharacter)) &&
+                        (!lastCharacter.equals(plusCharacter)) &&
+                        (!lastCharacter.equals(multiplyCharacter)) &&
+                        (!lastCharacter.equals(divideCharacter));
+                if (noOperationSymbolAtTheEnd) {
+                    expressionTextView.append(characterString);
+                }
+            } else {
+                expressionTextView.append(characterString);
+            }
+        }
     }
 
     private final View.OnClickListener clearButtonListener = new View.OnClickListener() {
