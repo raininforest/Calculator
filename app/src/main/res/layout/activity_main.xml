@@ -9,42 +9,6 @@
     android:padding="0dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/expressionTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/default_margin"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:autofillHints=""
-        android:contentDescription="@string/expressionTextView_text"
-        android:editable="false"
-        android:ems="10"
-        android:gravity="top|end"
-        android:hint="@string/expressionTextView_text"
-        android:inputType="textMultiLine"
-        android:textColor="@color/expression_text_color"
-        android:textSize="@dimen/expression_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/resultTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/resultTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/default_margin"
-        android:ems="10"
-        android:gravity="end"
-        android:inputType="number"
-        android:text="@string/resultTextView_text"
-        android:textColor="@color/result_text_color"
-        android:textSize="@dimen/result_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -53,6 +17,7 @@
         app:layout_constraintGuide_percent="0.35" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="0dp"
@@ -325,7 +290,42 @@
                 android:text="@string/divide_text"
                 android:textSize="@dimen/button_text_size" />
         </TableRow>
-
     </TableLayout>
+
+    <TextView
+        android:id="@+id/expressionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="end"
+        android:hint="@string/expressionTextView_text"
+        android:textColor="@color/expression_text_color"
+        android:textColorHint="@color/hint_text_color"
+        android:textSize="@dimen/expression_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/resultTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:ems="10"
+        android:gravity="end"
+        android:text="@string/resultTextView_text"
+        android:textColor="@color/result_text_color"
+        android:textSize="@dimen/result_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

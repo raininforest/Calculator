@@ -25,7 +25,7 @@
 
     <string name="plus_text">+</string>
     <string name="minus_text">-</string>
-    <string name="multiply_text">*</string>
+    <string name="multiply_text">x</string>
     <string name="divide_text">/</string>
 
     <string name="error_result">ERROR</string>
