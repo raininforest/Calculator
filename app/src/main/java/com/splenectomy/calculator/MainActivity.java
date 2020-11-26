@@ -1,12 +1,14 @@
 package com.splenectomy.calculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import static com.splenectomy.calculator.calculator.Calculator.calculateExpression;
 
 public class MainActivity extends AppCompatActivity {
     private TextView expressionTextView;
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private Button minusButton;
     private Button multiplyButton;
     private Button divideButton;
+
+    private Integer openBracesCount = 0;
+    private Integer closeBracesCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             expressionTextView.setText("");
             resultTextView.setText("0");
+            openBracesCount = 0;
+            closeBracesCount = 0;
         }
     };
 
@@ -143,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             StringBuilder str = new StringBuilder(expressionTextView.getText().toString());
             if (str.length()>0) {
+                if (str.charAt(str.length()-1) == '(') {
+                    openBracesCount -= 1;
+                } else if (str.charAt(str.length()-1) == ')') {
+                    closeBracesCount -= 1;
+                }
                 str.deleteCharAt(str.length()-1);
                 expressionTextView.setText(str);
             }
@@ -153,15 +165,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             expressionTextView.append("(");
+            openBracesCount += 1;
         }
     };
 
     private final View.OnClickListener closeBraceButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            StringBuilder str = new StringBuilder(expressionTextView.getText().toString());
-            if (str.length() > 1) {
-                expressionTextView.append(")");
+            String expressionString = expressionTextView.getText().toString();
+            if (!expressionString.isEmpty()){
+                boolean isThereOpenBraceForThisCloseBrace = openBracesCount > closeBracesCount;
+                boolean previosSymbolIsNotOpenBrace = expressionString.charAt(expressionString.length()-1) != '(';
+                if (isThereOpenBraceForThisCloseBrace && previosSymbolIsNotOpenBrace) {
+                    expressionTextView.append(")");
+                    closeBracesCount += 1;
+                }
             }
         }
     };
@@ -213,7 +231,14 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener equalsButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            resultTextView.setText(getResources().getString(R.string.error_result));
+            String result;
+            if (openBracesCount == closeBracesCount) {
+                result = calculateExpression(expressionTextView.getText().toString());
+
+            } else {
+                result = getResources().getString(R.string.error_result);
+            }
+            resultTextView.setText(result);
         }
     };
 }
